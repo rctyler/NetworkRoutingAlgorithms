@@ -13,27 +13,21 @@
 #include "Edge.h"
 #include "EdgeHeap.h"
 #include "DisjointSet.h"
+#include "MinimumSpanningTreeAlgorithm.h"
 
-class KruskalsAlgorithm
+class KruskalsAlgorithm : public MinimumSpanningTreeAlgorithm
 {
 public: 
 	KruskalsAlgorithm(char const*);
 	~KruskalsAlgorithm();
 	void findMinimumSpanningTree();
-	void setupTree(char const*);
 	void print();
 	void printMST();
 	
 private:
 	int MSTindex;
 	Edge *MSTedges;
-	EdgeHeap *edgeHeap;
 	disjointSet *DisjointS;
-	int nE;
-	int nV;
-	int u;
-	int v;
-	int cost;	
 };
 
 #endif

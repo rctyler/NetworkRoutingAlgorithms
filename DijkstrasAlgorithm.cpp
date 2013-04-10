@@ -4,8 +4,8 @@
  * Date: April 10, 2013
  *************************************************************************
  * Description: This is the implementation file for the DijkstrasAlgorithm
- *				class. Dijkstra's algorithm is one way to produce a
- *				minimum spanning tree over a graph
+ *				class. Dijkstra's algorithm is one way to find
+ *				the shortest path over a graph
  *************************************************************************/
 
 #include "DijkstrasAlgorithm.h"

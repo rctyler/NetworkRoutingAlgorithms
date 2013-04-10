@@ -9,35 +9,15 @@
 
 #include "PrimsAlgorithm.h"
 
-PrimsAlgorithm::PrimsAlgorithm(char const*inputFile)
+PrimsAlgorithm::PrimsAlgorithm(char const*inputFile) : MinimumSpanningTreeAlgorithm(inputFile)
 {
-    //read from file
-    ifstream file_in(inputFile);
-	
     this->closedIndex = 0; 
-	this->nE = 0;
-	this->nV = 0;
-	this->u = 0;
-	this->v = 0;
-	this->cost = 0; 
 	this->key = 0;
-	
-    file_in >> nV >> nE;
 	
     queue = new VertexHeap(nV+1);
     referenceArray = new Vertex[nV+1];
-    adjacencyList = new AdjacencyList(nV);
-    edgeHeap = new EdgeHeap(nE);
     MSTedges = new EdgeHeap(nE);
     closedList = new int[nV + 1];
-	
-    for (int i = 1; i <= nE; i++)
-    {
-        file_in >> u >> v >> cost;
-		edgeHeap->minHeapInsert(cost, u, v);
-		adjacencyList->addVertex(u, v);
-		adjacencyList->addVertex(v, u);
-    }
     
     for (int i = 1; i <= nV; i++)
     {
@@ -48,15 +28,12 @@ PrimsAlgorithm::PrimsAlgorithm(char const*inputFile)
 	
     queue->minHeapInsert(1, 0, 0);
     referenceArray[1].setKey(0);
-	
-    file_in.close();
 }
 
 PrimsAlgorithm::~PrimsAlgorithm()
 {
     delete queue;
     delete [] referenceArray;
-    delete edgeHeap;
     delete MSTedges;
     delete [] closedList;
 }

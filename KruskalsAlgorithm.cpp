@@ -1,34 +1,14 @@
 #include "KruskalsAlgorithm.h"
 
-KruskalsAlgorithm::KruskalsAlgorithm(char const*inputFile)
-{
-    //read from file
-    ifstream file_in(inputFile);
-	
-    int u, v, cost = 0;     
-    file_in >> nV >> nE;
-	
-    edgeHeap = new EdgeHeap(nE); 
-	
-    for (int i = 1; i <= nE; i++)
-    {
-        file_in >> u >> v >> cost;
-		edgeHeap->minHeapInsert(cost, u, v);
-    }   
-	
+KruskalsAlgorithm::KruskalsAlgorithm(char const*inputFile) : MinimumSpanningTreeAlgorithm(inputFile)
+{	
     MSTindex = 0;
-	
-    //initialize disjointSet array
     DisjointS = new disjointSet(nV);
-	
     MSTedges = new Edge[nE];
-	
-    file_in.close();
 }
 
 KruskalsAlgorithm::~KruskalsAlgorithm()
 {
-    delete edgeHeap;
     delete [] MSTedges;
     delete DisjointS;
 }

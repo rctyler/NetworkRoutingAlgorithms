@@ -48,7 +48,7 @@ vector<int> AdjacencyList::getListAt(int x)
 void AdjacencyList::print()
 {
     int memoryUsed = 0;
-    cout << "Adjacency List:  ";
+    cout << "Adjacency List:\n";
 	
     for (int i = 1; i <= adjacencyDepth; i++)
         memoryUsed += (adjacencyList[i].size() * sizeof(int));

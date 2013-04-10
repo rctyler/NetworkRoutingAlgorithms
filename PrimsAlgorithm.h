@@ -17,33 +17,28 @@
 #include "VertexHeap.h"
 #include "EdgeHeap.h"
 #include "Vertex.h"
+#include "MinimumSpanningTreeAlgorithm.h"
 
 using namespace std;
 
-class PrimsAlgorithm
+class PrimsAlgorithm : public MinimumSpanningTreeAlgorithm
 {
 public:
 	PrimsAlgorithm(char const*);
 	~PrimsAlgorithm();
 	void findMinimumSpanningTree();
-	void computeMST();
 	void print();
 	void printMST();
 	
 private:
+	void computeMST();
  	VertexHeap *queue;
 	Vertex *referenceArray;
-	AdjacencyList *adjacencyList;
-	EdgeHeap *edgeHeap;
 	EdgeHeap *MSTedges;
 	int *closedList;
 	int closedIndex;
-	int nV;
-	int nE;
 	int key;
-	int cost;
-	int u;
-	int v;
+	
 };
 
 #endif
