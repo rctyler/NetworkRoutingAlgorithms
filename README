@@ -1,0 +1,17 @@
+This project implements various network algorithms on an undirected graph (this graph can represent various routers in a network). The user has the option to step through the iterations for each algorithm to see its inner workings, or they can jump to the end solution. The graph is stored in text format inside the folder InputFiles. The graph being read by the program is labeled "input.txt". If you want to change the graph, just create your own file, but make sure to name it "input.txt." 
+
+The Algorithms that this program covers are:
+
+Minimum Spanning Tree Algorithms:
+1) Kruskal's Algorithm
+2) Prim's Algoritm
+
+Shortest Path Algorithms:
+1) Dijktra's Algorithm
+2) Bellman's Ford Algorithm
+
+
+To compile: Type "make" into your command line, and then type ./NetworkRoutingAlgorithms to run. Type "make clean"
+to clean up the object files and executable.
+
+To Use: Follow the in-program instructions 
