@@ -10,54 +10,15 @@
 
 #include "BellmanFordsAlgorithm.h"
 
-BellmanFordsAlgorithm::BellmanFordsAlgorithm(int s, int d, char const*inputFile)
-{
-    source = s;
-    destination = d;
-	
-    //read from file
-    ifstream file_in(inputFile);
-	
-    int cost, key = 0;
-	
-    file_in >> nV >> nE;
-	
+BellmanFordsAlgorithm::BellmanFordsAlgorithm(int src, int dest, char const*inputFile) 
+	: ShortestPathAlgorithm(src, dest, inputFile)
+{	
     Vertices = new Vertex[nV + 1];
-    edgeHeap = new EdgeHeap(nE);
     shortestPathArray = new int[nV];
-	
-    if (s < d)
-    {
-    	for (int i = 1; i <= nE; i++)
-    	{
-            file_in >> u >> v >> cost;
-			
-            if (u < v)
-				edgeHeap->minHeapInsert(cost, u, v);
-			else if (u > v)
-				edgeHeap->minHeapInsert(cost, v, u);
-    	}
-    }
-    else if (s > d)
-    {
-        for (int i = 1; i <= nE; i++)
-        {
-            file_in >> u >> v >> cost;
-			
-            if (u < v)
-                edgeHeap->minHeapInsert(cost, v, u);
-			else if (u > v)
-                edgeHeap->minHeapInsert(cost, u, v);
-        }
-		
-    }
-    
-    file_in.close();
 }
 
 BellmanFordsAlgorithm::~BellmanFordsAlgorithm()
 {
-    delete edgeHeap;
     delete [] Vertices;
     delete [] shortestPathArray;
 }

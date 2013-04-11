@@ -13,8 +13,9 @@
 #include <fstream>
 #include "EdgeHeap.h"
 #include "Vertex.h"
+#include "ShortestPathAlgorithm.h"
 
-class BellmanFordsAlgorithm
+class BellmanFordsAlgorithm : public ShortestPathAlgorithm
 {
 public:
 	BellmanFordsAlgorithm(int, int, char const*);
@@ -26,17 +27,10 @@ public:
 	void printShortestPath();
 	
 private:
-	EdgeHeap *edgeHeap;
 	Vertex *Vertices;
 	int *shortestPathArray;
-	int nV;
-	int nE;
-	int source;
-	int destination;
 	int a;
 	int b;
-	int u;
-	int v;
 	int w;
 };
 

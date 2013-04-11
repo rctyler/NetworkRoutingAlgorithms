@@ -15,30 +15,25 @@
 #include "VertexHeap.h"
 #include "AdjacencyList.h"
 #include "EdgeHeap.h"
+#include "ShortestPathAlgorithm.h"
 
 using namespace std;
 
-class DijkstrasAlgorithm
+class DijkstrasAlgorithm : public ShortestPathAlgorithm
 {
 public:
 	DijkstrasAlgorithm(int, int, char const*);
 	~DijkstrasAlgorithm();
 	void initializeSingleSource();
 	void relax(Vertex, Vertex,  int);
-	void findShortestPath();
+	bool findShortestPath();
 	void print();
 	void printShortestPath();
 	
 private:
-	EdgeHeap *edgeHeap;
 	VertexHeap *queue;
 	Vertex *referenceArray;
-	AdjacencyList *adjacencyList;
 	int *S;
-	int source;
-	int destination;
-	int nV;
-	int nE;
  	int nodesProcessedIndex;
 };
 

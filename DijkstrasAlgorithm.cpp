@@ -4,84 +4,41 @@
  * Date: April 10, 2013
  *************************************************************************
  * Description: This is the implementation file for the DijkstrasAlgorithm
- *				class. Dijkstra's algorithm is one way to find
- *				the shortest path over a graph
+ *				class. Dijkstra's algorithm is one way to find the
+ *				shortest path over a graph
  *************************************************************************/
 
 #include "DijkstrasAlgorithm.h"
 
 DijkstrasAlgorithm::DijkstrasAlgorithm(int src, int dest, char const*inputFile)
+	: ShortestPathAlgorithm(src, dest, inputFile)
 {
-    source = src;
-    destination = dest;
+	nodesProcessedIndex = 0;
 	
-    //read from file
-	ifstream file_in(inputFile);
-	
-    int u, v, cost, key, nodesProcesedIndex = 0;
-	
-    file_in >> nV >> nE;
-	
-    edgeHeap = new EdgeHeap(nE);
     queue = new VertexHeap(nV);
-    adjacencyList = new AdjacencyList(nV);
     referenceArray = new Vertex[nV + 1];
     S = new int[nV];  
 	
-    if (src < dest)
-    {
-    	for (int i = 1; i <= nE; i++)
-    	{
-            file_in >> u >> v >> cost;
-            
-            if (cost < 0)
-			{
-				cout << "Cannot use Dijkstra's Algorithm for this network setup. Please make sure that" << endl;
-                cout << "the network contains no links with negative costs." << endl << endl << endl;
-                throw(1);
-			} 
-            if (u < v)
-				edgeHeap->minHeapInsert(cost, u, v);
-			else if (u > v)
-				edgeHeap->minHeapInsert(cost, v, u);
-			
-			adjacencyList->addVertex(u, v);
-			adjacencyList->addVertex(v, u);
-    	}
-    }
-    else if (src > dest)
-    {
-        for (int i = 1; i <= nE; i++)
-        {
-            file_in >> u >> v >> cost;
-			
-            if (u < v)
-                edgeHeap->minHeapInsert(cost, v, u);
-            else if (u > v)
-                edgeHeap->minHeapInsert(cost, u, v);
-			
-			adjacencyList->addVertex(u, v);
-            adjacencyList->addVertex(v, u);
-        }
-    }
-	
+	if (checkForNegativeEdges() == true)
+	{
+		cout << "Cannot use Dijkstra's Algorithm for this network setup. Please make sure that" << endl;
+		cout << "the network contains no links with negative costs." << endl << endl << endl;
+		throw(1);
+	} 
+
     for (int i = 1; i <= nV; i++)
     {
         referenceArray[i].setReference(i);
         referenceArray[i].setKey(1234567);
         referenceArray[i].setParent(0);
     }
-    
-    file_in.close();
 }
 
 DijkstrasAlgorithm::~DijkstrasAlgorithm()
 {
-    delete edgeHeap;
     delete queue;
-    delete referenceArray;
-	
-    delete S;
+    delete [] referenceArray;
+    delete [] S;
 }
 
 inline void DijkstrasAlgorithm::initializeSingleSource()
@@ -100,7 +57,7 @@ void DijkstrasAlgorithm::relax(Vertex u, Vertex v, int w)
     }
 }
 
-void DijkstrasAlgorithm::findShortestPath()
+bool DijkstrasAlgorithm::findShortestPath()
 {
     Vertex u;
     int v;
@@ -154,7 +111,6 @@ void DijkstrasAlgorithm::findShortestPath()
              	    jumpToEnd = false;
 				else if (choice == 'G' or choice == 'g')
 				{
-					printf("G pressed!\n");
 					jumpToEnd = true;
 				}
 				else
@@ -176,7 +132,8 @@ void DijkstrasAlgorithm::findShortestPath()
 			loopIndex++;
 		}
     }
-	
+	printf("[%d]\n", nodesProcessedIndex);
+	/*
     if (jumpToEnd == false)
     {
 	choice2:
@@ -193,7 +150,7 @@ void DijkstrasAlgorithm::findShortestPath()
             cout << "Please type either N or G." << endl << endl;
             goto choice2;
         }
-    }
+    }*/
 	
     cout << "Dijkstra's Algorithm Iteration " << loopIndex << endl;
     cout << "-------------------------------" << endl;
@@ -201,6 +158,8 @@ void DijkstrasAlgorithm::findShortestPath()
     cout << "-------------------------------" << endl << endl << endl; 
 	
     printShortestPath();
+	
+	return true;
 }
 
 void DijkstrasAlgorithm::print()

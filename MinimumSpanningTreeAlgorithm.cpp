@@ -1,3 +1,15 @@
+/*************************************************************************
+ * Developer: Raymond Tyler
+ * File: MinimumSpanningTreeAlgorithm.cpp
+ * Date: April 10, 2013
+ *************************************************************************
+ * Description: This is the implementation file for the MininimumSpanning-
+ *				TreeAlgorithm abstract class. It defines the constructor
+ *				for the abstract class that initializes both the Edge Heap, 
+ *				and Adjacency List representations of an undirected, weighted
+ *				graph that includes edges, vertices, and cost
+ *************************************************************************/
+
 #include "MinimumSpanningTreeAlgorithm.h"
 
 MinimumSpanningTreeAlgorithm::MinimumSpanningTreeAlgorithm(char const *inputFile)
